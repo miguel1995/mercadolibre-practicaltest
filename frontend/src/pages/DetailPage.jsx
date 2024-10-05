@@ -102,17 +102,11 @@ const DetailPage = () => {
 
             <Modal title="Mercado Libre" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
                    footer={[
-
-                       <Button key="submit" type="primary"  onClick={handleOk}>
-                            Continuar Comprando
-                       </Button>,
-
-                   ]}
+                       <button key="dubmitModal" className="detail__button--decoration" onClick={handleOk}>Continuar Comprando</button>
+                                          ]}
             >
                 <p>Producto agregado al carrito de compras</p>
             </Modal>
-
-
 
 
         </div>

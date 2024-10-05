@@ -1,4 +1,20 @@
 .browser__container{
   background-color: $meli-yellow;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 64px 8px 64px;
+  gap: 32px;
 
 }
+
+
+:where(.css-dev-only-do-not-override-ccdg5a).ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover {
+                                             background: $meli-grey-ligth;
+                                             color: $meli-grey-ligth;
+                                           }
+
+:where(.css-dev-only-do-not-override-ccdg5a).ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled) {
+  background: $meli-grey-ligth;
+  color: $meli-grey-ligth;
+}
+
