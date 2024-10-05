@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const itemServices = axios.create({
-    baseURL: 'https://api.ejemplo.com',
+    baseURL: 'http://localhost:4000/api',
 });
 
-export const getItemsBySearch = (word) => itemServices.get('/items',{params:{search:word}});
-export const getItemById = (id) => itemServices.get('/data');
+export const getItemsBySearch = (word) => itemServices.get('/items',{params:{q:word}});
+export const getItemById = (id) => itemServices.get(`/items/${id}`);
 
