@@ -1,7 +1,7 @@
 // Lógica del endpoint
 
 const { fetchItems, fetchItemById, fetchProductDescriptionById } = require('../services/itemService');
-const {authorSignature, AUTHOR_SIGNATURE} = require("../utils/constants");
+const { AUTHOR_SIGNATURE} = require("../utils/constants");
 const {buildItems, buildDetailItem} = require("../utils/builderUtils");
 
 

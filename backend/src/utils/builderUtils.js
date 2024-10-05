@@ -29,7 +29,7 @@ const buildDetailItem = (detailResult) => {
             amount: detailResult["price"]??0,
             decimals: "00"
         },
-        picture: detailResult["thumbnail"]??"",
+        picture: detailResult["pictures"][0]["url"]??"",
         condition: detailResult["condition"]??"",
         free_shipping: detailResult["shipping"]["free_shipping"]??""
     }

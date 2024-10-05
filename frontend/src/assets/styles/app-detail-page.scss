@@ -1,11 +1,37 @@
 
 
+@media only screen and (max-width: 767px){
+
+  .detail__container--margin{
+    background-color: $general-white;
+    padding: 32px;
+  }
+}
+@media only screen and (min-width: 768px){
+  .detail__container--margin{
+    background-color: $general-white;
+    margin: 32px 64px 0px 64px;
+    padding: 32px;
+  }
+}
 
 
-.detail__container--margin{
-  background-color: $general-white;
-  margin: 32px 64px 32px 64px;
-  padding: 32px;
+
+.detail__main-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.detail__description--title {
+  font-size: 28px;
+  margin-top: 16px;
+
+}
+
+.detail__description--content {
+  font-size: 16px;
+  margin: 32px 0;
+
 }
 
 .detail__aditional-info {
@@ -40,6 +66,8 @@
 
 .detail__title--text{
   font-size: 24px;
+  font-weight: normal;
+
 }
 
 .detail__amount--text{
