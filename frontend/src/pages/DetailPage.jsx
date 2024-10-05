@@ -1,46 +1,25 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getItemById} from "../services/itemServices";
-import {Button, Col, Image, Modal, Row, Spin} from "antd";
+import React, {useEffect} from "react";
+import {Col, Image, Modal, Row, Spin} from "antd";
 import {convertNumberToMoney} from "../utils/convertionsUtils";
+import useDetailHandler from "../hooks/useDetailHandler";
+import useModal from "../hooks/useModal";
 
 const DetailPage = () => {
 
-    let { id } = useParams();
-    const [item, setItem] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
+    const {
+        item,
+        isLoading, loadItemFromUrlId } = useDetailHandler();
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
+   const {
+       isModalOpen,
+       showModal,
+       handleOk,
+       handleCancel
+   } = useModal();
 
     useEffect(() => {
 
-        if (id){
-            getItemById(id).then(
-                (response) => {
-
-                    setTimeout(()=>{
-                        setItem(response.data.item);
-                        setIsLoading(false);
-
-                    }, 2000)
-
-                }
-            );
-        }
-
+        loadItemFromUrlId();
 
 
 

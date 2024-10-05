@@ -2,7 +2,7 @@
 
 const { fetchItems, fetchItemById, fetchProductDescriptionById } = require('../services/itemService');
 const { AUTHOR_SIGNATURE} = require("../utils/constants");
-const {buildItems, buildDetailItem} = require("../utils/builderUtils");
+const {buildItems, buildDetailItem, getCategoryList} = require("../utils/builderUtils");
 
 
 
@@ -13,11 +13,12 @@ const getItems = async (req, res) => {
 
         const serviceResult = await fetchItems(searchQuery);
 
-        const itemList = buildItems(serviceResult["results"]);
 
+        const itemList = buildItems(serviceResult["results"]);
+        const categoryList = getCategoryList(serviceResult["available_filters"]);
         const result = {
             author: AUTHOR_SIGNATURE,
-            categories: [],
+            categories: categoryList,
             items:itemList
         }
 
