@@ -1,7 +1,40 @@
 
 
 
+
+.detail__container--margin{
+  background-color: $general-white;
+  margin: 32px 64px 32px 64px;
+  padding: 32px;
+}
+
+.detail__aditional-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail__aditional-info--header {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  padding: 32px 0px 14px 0px;
+
+}
+
+
+.detail__price--container{
+  padding: 32px 0px 32px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+
 .detail__condition--text{
+  font-size: 14px;
+}
+
+.detail__cuantity--text{
   font-size: 14px;
 }
 
@@ -17,3 +50,11 @@
   font-size: 24px;
 }
 
+.detail__button--decoration {
+  background-color: $meli-blue;
+  padding: 10px;
+  border: 2px solid $meli-blue;
+  border-radius: 4px;
+  color: $general-white;
+
+}

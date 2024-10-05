@@ -27,7 +27,7 @@ const buildDetailItem = (detailResult) => {
         price: {
             currency: detailResult["currency_id"]??"",
             amount: detailResult["price"]??0,
-            decimals: detailResult["price"]??0
+            decimals: "00"
         },
         picture: detailResult["thumbnail"]??"",
         condition: detailResult["condition"]??"",

@@ -39,7 +39,7 @@ const getItemsById = async (req, res) => {
             const newItem = buildDetailItem(serviceResult);
             const serviceDescriptionResult = await fetchProductDescriptionById(itemId);
 
-            newItem["sold_quantity"] = "";
+            newItem["sold_quantity"] = 234;
             newItem["description"] = serviceDescriptionResult["plain_text"]??"";
 
             const result = {
