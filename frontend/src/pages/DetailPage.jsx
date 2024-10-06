@@ -1,14 +1,15 @@
 import React, {useEffect} from "react";
-import {Col, Image, Modal, Row, Spin} from "antd";
+import {Breadcrumb, Col, Image, Modal, Row, Spin} from "antd";
 import {convertNumberToMoney} from "../utils/convertionsUtils";
 import useDetailHandler from "../hooks/useDetailHandler";
 import useModal from "../hooks/useModal";
+import AditionalInfo from "../components/AditionalInfo";
 
 const DetailPage = () => {
 
     const {
-        item,
-        isLoading, loadItemFromUrlId } = useDetailHandler();
+        currentItem,
+        isLoading, loadItemFromUrlId, categoryList } = useDetailHandler();
 
    const {
        isModalOpen,
@@ -18,15 +19,20 @@ const DetailPage = () => {
    } = useModal();
 
     useEffect(() => {
-
         loadItemFromUrlId();
-
-
-
-
     }, []);
 
     return (
+
+        <>
+            <Breadcrumb
+                key="breadcrumb"
+                className="categories__breadcrumb--container"
+                separator=">"
+                items={categoryList}
+            />
+
+
         <div className="detail__container--margin">
 
             {
@@ -35,35 +41,18 @@ const DetailPage = () => {
                         <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
                             <div className="detail__main-info">
 
-                                <Image src={item.picture} max={680}/>
+                                <Image src={currentItem.picture} max={680}/>
                                 <div className="detail__description--title">
                                     Descripción del producto
                                 </div>
                                 <div className="detail__description--content">
-                                    {item.description}
+                                    {currentItem.description}
                                 </div>
                             </div>
 
                         </Col>
                         <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={8}>
-                            <div className="detail__aditional-info">
-                                <div className="detail__aditional-info--header">
-                                    <div className="detail__condition--text">{item.condition}</div>
-                                    -
-                                    <div className="detail__cuantity--text">{item.sold_quantity} vendidos</div>
-                                </div>
-                                <div className="detail__title--text">{item.title}</div>
-
-
-
-                                <div className="detail__price--container">
-                                    <div className="detail__amount--text">$ {convertNumberToMoney(item.price.amount, item.price.currency)}</div>
-                                    <div className="detail__decimal--text">{item.price.decimals}</div>
-                                </div>
-
-                                <button className="detail__button--decoration" onClick={showModal}>Comprar</button>
-
-                                </div>
+                           <AditionalInfo currentItem={currentItem} callbackBtn={showModal} />
                         </Col>
 
                     </Row>
@@ -89,6 +78,7 @@ const DetailPage = () => {
 
 
         </div>
+        </>
     );
 }
 

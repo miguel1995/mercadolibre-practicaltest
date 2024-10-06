@@ -1,18 +1,25 @@
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
 import {getItemsBySearch} from "../services/itemServices";
+import {useDispatch, useSelector} from "react-redux";
+import {onSaveItems} from "../store/slices/itemsSlice";
+import {onSaveCategories} from "../store/slices/categorySlice";
 
 
 const useResultHandler = () => {
 
-    const [itemsList, setItemsList] = useState([]);
-    const [categoryList, setCategoryList] = useState([]);
     const navigate = useNavigate();
-    
-    const loadImageFromUrlParam = (searchParam) => {
+    const dispatch = useDispatch();
+
+    const { itemsList } = useSelector((state) => state.items);
+    const { categoryList } = useSelector((state) => state.categories);
+
+
+    const loadItemsFromUrlParam = (searchParam) => {
         getItemsBySearch(searchParam).then(
             (response) => {
-                setItemsList(response.data.items);
+
+                dispatch(onSaveItems(response.data.items.slice(1,5)));
+
                 let categories = response.data.categories || [];
                 if (categories && categories.length > 0) {
                     categories = categories.slice(1,6);
@@ -27,15 +34,15 @@ const useResultHandler = () => {
                         }
                     }
                 );
+                dispatch(onSaveCategories(categoryListBreadcrumbItems));
 
-                setCategoryList(categoryListBreadcrumbItems);
             }
         );
     }
 
     const clearItems = () => {
 
-        setItemsList([]);
+        dispatch(onSaveItems([]));
 
     }
 
@@ -47,7 +54,7 @@ const useResultHandler = () => {
     return {
         itemsList,
         categoryList,
-        loadImageFromUrlParam,
+        loadItemsFromUrlParam,
         clearItems,
         goToDetail
 

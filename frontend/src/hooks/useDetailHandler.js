@@ -1,16 +1,24 @@
 import {useParams} from "react-router-dom";
 import {useState} from "react";
 import {getItemById} from "../services/itemServices";
+import {useDispatch, useSelector} from "react-redux";
+import {onSaveCurrentItem} from "../store/slices/itemsSlice";
 
 
 const useDetailHandler = () => {
-    let { id } = useParams();
 
-    const [item, setItem] = useState({});
+    let { id } = useParams();
+    const { currentItem } = useSelector((state) => state.items);
+    const { categoryList } = useSelector((state) => state.categories);
+
+    const dispatch = useDispatch();
+
     const [isLoading, setIsLoading] = useState(true);
 
     const loadItems =  (response) => {
-        setItem(response.data.item);
+
+        dispatch(onSaveCurrentItem(response.data.item));
+
         setIsLoading(false);
     }
 
@@ -28,8 +36,9 @@ const useDetailHandler = () => {
     }
 
     return{
-        item,
+        currentItem,
         isLoading,
+        categoryList,
         loadItemFromUrlId
     }
 

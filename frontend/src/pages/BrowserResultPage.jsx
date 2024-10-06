@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 
-import {Breadcrumb, Col, Divider, Row} from "antd";
-import {convertNumberToMoney} from "../utils/convertionsUtils";
+import {Breadcrumb, Divider} from "antd";
 import useResultHandler from "../hooks/useResultHandler";
 import {useSearchParams} from "react-router-dom";
+import ItemCard from "../components/ItemCard";
 
 const BrowserResultPage = () => {
 
     const [queryParameters] = useSearchParams();
+    const {loadItemsFromUrlParam, clearItems, goToDetail, categoryList, itemsList} = useResultHandler();
 
-    const {loadImageFromUrlParam, clearItems, goToDetail, categoryList, itemsList} = useResultHandler();
+
     useEffect(() => {
         const searchParam = queryParameters.get('search');
         if (searchParam) {
-            loadImageFromUrlParam(queryParameters);
+            loadItemsFromUrlParam(searchParam);
         }else{
             clearItems();
         }
@@ -37,49 +38,8 @@ const BrowserResultPage = () => {
             {
                 itemsList.map((item, index) => (
                     <div  className='card__container' onClick={()=>goToDetail(item.id)}>
-                        <Row key={index} gutter={[16, 0]}>
-
-                            <Col
-                                xs={24}
-                                sm={24}
-                                md={4}
-                                lg={4}
-                                xl={4}
-                                xxl={4}
-
-                            >
-
-                                <img src={item.picture} width="180" height="180" alt="imagenProducto"/>
-
-                            </Col>
-                            <Col
-                                xs={24}
-                                sm={24}
-                                md={16}
-                                lg={16}
-                                xl={16}
-                                xxl={16}
-                            >
-
-                                <div className="card__amount--text">
-                                    $ {convertNumberToMoney(item.price.amount)}
-                                </div>
-
-                                <div className="card__title--text">
-                                    {item.title}
-                                </div>
-
-                            </Col>
-                            <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
-                                <div className="card__location--text">
-                                    Capital Federal
-                                </div>
-                            </Col>
-
-                        </Row>
-
+                            <ItemCard item={item} index={index}/>
                             <Divider></Divider>
-
                     </div>
 
                 ))
