@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import {Breadcrumb, Col, Image, Modal, Row, Spin} from "antd";
-import {convertNumberToMoney} from "../utils/convertionsUtils";
 import useDetailHandler from "../hooks/useDetailHandler";
 import useModal from "../hooks/useModal";
 import AditionalInfo from "../components/AditionalInfo";
+import {Helmet} from "react-helmet";
 
 const DetailPage = () => {
 
@@ -25,6 +25,19 @@ const DetailPage = () => {
     return (
 
         <>
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>{currentItem.title}</title>
+                <link rel="canonical" href={`http://mysite.com/item/${currentItem.id}`}/>
+                <meta name={"description"} content={currentItem.description}/>
+                
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={currentItem.title} />
+                <meta property="og:description" content={currentItem.description} />
+                <meta property="og:image" content={currentItem.picture} />
+                <meta property="og:url" content={`http://mysite.com/item/${currentItem.id}`} />
+            </Helmet>
+
             <Breadcrumb
                 key="breadcrumb"
                 className="categories__breadcrumb--container"
@@ -33,11 +46,11 @@ const DetailPage = () => {
             />
 
 
-        <div className="detail__container--margin">
+            <div className="detail__container--margin">
 
-            {
-                (!isLoading) && (
-                    <Row gutter={[16, 0]}>
+                {
+                    (!isLoading) && (
+                        <Row gutter={[16, 0]}>
                         <Col xs={24} sm={24} md={16} lg={16} xl={16} xxl={16}>
                             <div className="detail__main-info">
 
